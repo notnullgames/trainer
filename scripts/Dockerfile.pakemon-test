@@ -1,0 +1,8 @@
+FROM alpine
+
+RUN apk add luajit lua5.1-socket
+COPY scripts/test_pakemon.lua /app/
+
+WORKDIR /app
+
+CMD luajit /app/test_pakemon.lua

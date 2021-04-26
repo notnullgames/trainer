@@ -8,17 +8,25 @@ This is a trainer implemented in lua that relies on system-deps to work
 You will need luajit, copas, lua-sec, and lua-socket as well as tor installed.
 
 
-## docker
+## usage
 
-I included a Dockerfile, so you can test the trainer/
+You will need valid SSL keys for client & server. You can generate some with this:
 
 ```
-docker build -t trainer .
-docker run --rm -it trainer -v ${PWD}/hidden_service:/app/hidden_service -p 12345:12345 -p 12346:12346
+make keys
 ```
 
 
-## local
+### docker
+
+You can run a test-trainer in docker:
+
+```
+make trainer
+```
+
+
+### local
 
 On debian-based distros:
 
@@ -42,39 +50,25 @@ tor -f torrc
 
 Your address is in `./hidden_service/hostname`
 
-
-#### keys
-
-You need to generate your ssl keys:
-
-> **TODO** read more [here](https://www.scottbrady91.com/OpenSSL/Creating-RSA-Keys-using-OpenSSL)
-
-```
-luajit genkeys.lua
-```
-
-
-Now, you can run the lua server:
+Now you can start the service:
 
 ```
 luajit trainer.lua
 ```
 
-now you can connect using the local tor-relay
+## commands
+
+For pakemon and rattata, the commands are line-seperated params. Put each command on it's own line.
+
+Example:
 
 ```
-torsocks luajit client_rattata.lua <ADDRESS>.onion
+HELLO
+myname
+QUIT
 ```
 
-and you can test the local (pakemon) service:
+Since `HELLO` takes 1 param (name) `myname` is that.
 
-```
-luajit client_pakemon.lua
-```
 
-### notes
 
-Use control-port to generate a new circuit
-```
-echo -e 'AUTHENTICATE ""\r\nsignal NEWNYM\r\nQUIT' | nc 127.0.0.1 9051
-```

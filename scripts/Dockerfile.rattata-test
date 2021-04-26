@@ -1,0 +1,10 @@
+FROM alpine
+
+RUN apk add luajit lua5.1-sec lua5.1-socket tor torsocks
+COPY scripts/test_rattata.lua /app/
+
+WORKDIR /app
+VOLUME /app/hidden_service
+
+CMD tor --runasdaemon 1 && \
+  torsocks luajit /app/test_rattata.lua $(cat /app/hidden_service/hostname)
