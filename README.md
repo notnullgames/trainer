@@ -29,6 +29,8 @@ Your address is in `./hidden_service/hostname`
 
 You need to generate your ssl keys:
 
+> **TODO** read more [here](https://www.scottbrady91.com/OpenSSL/Creating-RSA-Keys-using-OpenSSL)
+
 ```
 luajit genkeys.lua
 ```
