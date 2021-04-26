@@ -2,6 +2,8 @@
 
 This is a trainer implemented in lua that relies on system-deps to work
 
+This is the trainer (manager) system for [pakemon](https://github.com/notnullgames/pakemon). See [this](https://github.com/notnullgames/pakemon/wiki/Projects) for a full breakdown of the Pakémon ecosystem.
+
 
 ## dependencies
 
