@@ -5,10 +5,10 @@ This is a trainer implemented in lua that relies on system-deps to work
 
 ### setup
 
-You will need luajit, lua-sec, and lua-socket as well as tor installed. On debian-based distros:
+You will need luajit, copas, lua-sec, and lua-socket as well as tor installed. On debian-based distros:
 
 ```
-sudo apt install luajit lua-sec lua-socket tor
+sudo apt install luajit lua-sec lua-socket lua-copas tor
 ```
 
 It will try to setup a running tor service, which you should disable:

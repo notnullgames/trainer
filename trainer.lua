@@ -1,17 +1,37 @@
+local copas = require "copas"
 local socket = require "socket"
-local ltn12 = require "ltn12"
 
--- local server = assert(socket.bind("*", 0)) -- rattata: auto-pick port
-local server = assert(socket.bind("*", 12346)) -- rattata
-local ip, port = server:getsockname()
-
-print("Please telnet to localhost on port " .. port)
-print("After connecting, you have 10s to enter a line to be echoed")
-
-while 1 do
-  local client = server:accept()
-  client:settimeout(10)
-  local line, err = client:receive()
-  if not err then client:send(line .. "\n") end
-  client:close()
+function rattata_handler(skt)
+  while true do
+    local data = copas.receive(skt)
+    if data == "quit" then
+      break
+    end
+    if data then
+      print("rattata sent: " .. data)
+      copas.send(skt, data)
+    end
+    skt:close()
+  end
 end
+
+function pakemon_handler(skt)
+  while true do
+    local data = copas.receive(skt)
+    if data == "quit" then
+      break
+    end
+    if data then
+      print("pakemon sent: " .. data)
+      copas.send(skt, data)
+    end
+    skt:close()
+  end
+end
+
+copas.addserver(socket.bind('*', 12345), pakemon_handler)
+copas.addserver(socket.bind('*', 12346), rattata_handler)
+
+print("Listening on ports 12345 (pakemon) and 12346 (rattata)")
+
+copas.loop()
