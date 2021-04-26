@@ -1,2 +1,5 @@
 HiddenServiceDir ./hidden_service/
 HiddenServicePort 80 127.0.0.1:12346
+
+# this disables socks, so only service runs
+SocksPort 0

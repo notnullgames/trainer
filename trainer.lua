@@ -4,9 +4,9 @@ local socket = require "socket"
 local ssl_params = {
   mode = "server",
   protocol = "tlsv1_2",
-  key = "hidden_service/ssl/privkey.pem",
-  certificate = "hidden_service/ssl/server.pem",
-  cafile = "hidden_service/ssl/ca.pem",
+  key = "hidden_service/ssl/server/private/server_key.pem",
+  certificate = "hidden_service/ssl/server/server_cert.pem",
+  cafile = "hidden_service/ssl/ca/ca_cert.pem",
   verify = {"peer", "fail_if_no_peer_cert"},
   options = "all"
 }
