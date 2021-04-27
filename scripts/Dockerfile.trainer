@@ -2,7 +2,7 @@ FROM alpine
 
 EXPOSE 12345/tcp
 
-RUN apk add luajit lua-sec lua-socket lua5.1-copas tor
+RUN apk add luajit lua-sec lua-socket lua-filesystem lua5.1-copas tor
 COPY torrc /app/
 RUN sed -i 's/HiddenServiceDir ./HiddenServiceDir \/app/' /app/torrc
 COPY src /app/src

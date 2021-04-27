@@ -7,7 +7,7 @@ This is the trainer (manager) system for [pakemon](https://github.com/notnullgam
 
 ## dependencies
 
-You will need luajit, copas, lua-sec, and lua-socket as well as tor installed.
+You will need luajit, copas, lua-filesystem, lua-sec, and lua-socket as well as tor installed.
 
 
 ## usage
@@ -33,7 +33,7 @@ make trainer
 On debian-based distros:
 
 ```
-sudo apt install luajit lua-sec lua-socket lua-copas tor
+sudo apt install luajit lua-sec lua-filesystem lua-socket lua-copas tor
 ```
 
 It will try to setup a running tor service, which you should disable:
@@ -60,17 +60,16 @@ luajit trainer.lua
 
 ## commands
 
-For pakemon and rattata, the commands are line-seperated params. Put each command on it's own line.
+For pakemon and rattata, the commands are a single line, first is command, all the rest are args
 
 Example:
 
 ```
-HELLO
-myname
+HELLO World
 QUIT
 ```
 
-Since `HELLO` takes 1 param (name) `myname` is that.
+Since `HELLO` takes 1 param (name) `World` is that.
 
-
+Once we have all the commands worked out, I will document them here.
 
