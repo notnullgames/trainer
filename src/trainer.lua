@@ -32,17 +32,15 @@ function get_command(line)
   return cmd, args
 end
 
-math.randomseed(os.clock()^5)
-
 -- get a random string
 function random_string(length)
+  math.randomseed(os.clock()^5)
   local res = ""
   for i = 1, length do
     res = res .. string.char(math.random(97, 122))
   end
   return res
 end
-
 
 -- called whenever a rattata connects over tor
 function rattata_handler(skt)
@@ -64,7 +62,7 @@ function rattata_handler(skt)
         -- next line is name
         local name = args[1] or random_string(8)
         rattatas[name] = skt
-	skt.rattata = name
+        skt.rattata = name
         copas.send(skt, "HI " .. name)
       
       -- disconnect

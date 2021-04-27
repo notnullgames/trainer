@@ -20,7 +20,7 @@ local conn = socket.tcp()
 conn:connect(arg[1], 80)
 conn = ssl.wrap(conn, ssl_params)
 conn:dohandshake()
-conn:send("HELLO\ntestrat\nQUIT\n")
+conn:send("HELLO testrat\nQUIT\n")
 local err, status, content = conn:receive("*l")
 if err then
   error(err)
