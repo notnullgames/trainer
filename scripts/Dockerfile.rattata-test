@@ -1,6 +1,6 @@
 FROM alpine
 
-RUN apk add luajit lua5.1-sec lua5.1-socket tor torsocks
+RUN apk add torsocks tor luajit lua5.1-sec lua5.1-socket
 COPY scripts/test_rattata.lua /app/
 
 WORKDIR /app

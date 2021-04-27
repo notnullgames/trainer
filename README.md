@@ -7,7 +7,13 @@ This is the trainer (manager) system for [pakemon](https://github.com/notnullgam
 
 ## dependencies
 
-You will need luajit, copas, lua-filesystem, lua-sec, and lua-socket as well as tor installed.
+I will keep a running list of packagaes here, so you cna install them:
+
+```
+tor luajit lua-sec lua-filesystem lua-socket lua-copas lua-penlight
+```
+
+In most distros they have similar names.
 
 
 ## usage
@@ -33,7 +39,7 @@ make trainer
 On debian-based distros:
 
 ```
-sudo apt install luajit lua-sec lua-filesystem lua-socket lua-copas tor
+sudo apt install tor luajit lua-sec lua-filesystem lua-socket lua-copas lua-penlight
 ```
 
 It will try to setup a running tor service, which you should disable:
