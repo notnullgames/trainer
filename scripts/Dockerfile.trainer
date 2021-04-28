@@ -6,6 +6,7 @@ RUN apk add tor luajit lua5.1-copas lua5.1-sec lua5.1-socket lua5.1-penlight lua
 COPY torrc /app/
 RUN sed -i 's/HiddenServiceDir ./HiddenServiceDir \/app/' /app/torrc
 COPY src /app/src
+COPY eggs /app/eggs
 
 WORKDIR /app
 VOLUME /app/hidden_service

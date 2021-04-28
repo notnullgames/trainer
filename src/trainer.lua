@@ -1,5 +1,7 @@
 local copas = require "copas"
 local socket = require "socket"
+local dir = require "pl/dir"
+local path = require "pl/path"
 
 local ssl_params = {
   mode = "server",
@@ -11,14 +13,20 @@ local ssl_params = {
   options = "all"
 }
 
--- MOCK: list of available eggs
+
+-- list of available eggs
 local eggs = {}
+for _,file in pairs(dir.getfiles("eggs")) do
+  name,ext = path.splitext(path.basename(file))
+  eggs[name] = path.abspath(file)
+end
 
 
 -- list of current rattatas
 local rattatas = {}
 
 -- seperate command from args
+-- TODO: use penlight here
 function get_command(line)
   local cmd = nil
   local args = {}
@@ -101,7 +109,7 @@ function pakemon_handler(skt)
       -- say "hi" this is mostly for testing
       elseif command == "HELLO" then
         local name = args[1] or random_string(8)
-        copas.send(skt, "HI " .. name)
+        copas.send(skt, "HI " .. name .. "\n")
       
 
       -- get list of connected rats
@@ -112,9 +120,11 @@ function pakemon_handler(skt)
 
       -- get a list of eggs
       elseif command == "EGG_LIST" then
+        copas.send(skt, "EGG_LIST\n")
         for egg in pairs(eggs) do
-          copas.send(skt, egg)
+          copas.send(skt, egg.."\n")
         end
+        copas.send(skt, "EGG_LIST_END\n")
       
       -- disconnect
       elseif command == "QUIT" then

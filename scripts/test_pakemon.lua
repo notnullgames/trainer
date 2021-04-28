@@ -5,11 +5,7 @@ local socket = require "socket"
 
 local conn = socket.tcp()
 conn:connect("host.docker.internal", 12345)
-conn:send("HELLO testpakemon\nQUIT\n")
-local err, status, content = conn:receive("*l")
-if err then
-  error(err)
-else
-  print("Server (" .. status ..") said: " .. content)
-end
+conn:send("HELLO testpakemon\nEGG_LIST\nQUIT\n")
+local content = conn:receive("*all")
+print("Server said: " .. content)
 conn:close()
