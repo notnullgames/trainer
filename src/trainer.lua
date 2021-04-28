@@ -26,7 +26,6 @@ end
 local rattatas = {}
 
 -- seperate command from args
--- TODO: use penlight here
 function get_command(line)
   local cmd = nil
   local args = {}
@@ -114,9 +113,11 @@ function pakemon_handler(skt)
 
       -- get list of connected rats
       elseif command == "RATTATA_LIST" then
+        copas.send(skt, "RATTATA_LIST\n")
         for rattata in pairs(rattatas) do
-          copas.send(skt, rattata)
+          copas.send(skt, rattata.."\n")
         end
+        copas.send(skt, "RATTATA_LIST_END\n")
 
       -- get a list of eggs
       elseif command == "EGG_LIST" then
