@@ -10,7 +10,7 @@ This is the trainer (manager) system for [pakemon](https://github.com/notnullgam
 I will keep a running list of packagaes here, so you cna install them:
 
 ```
-tor luajit lua-sec lua-filesystem lua-socket lua-copas lua-penlight
+tor luajit lua-sec lua-filesystem lua-socket lua-copas lua-penlight lua-filesystem
 ```
 
 In most distros they have similar names.
@@ -66,7 +66,7 @@ luajit trainer.lua
 
 ## commands
 
-For pakemon and rattata, the commands are a single line, first is command, all the rest are args
+For pakemon and rattata, the commands are a single line, first is command, the rest are args
 
 Example:
 
